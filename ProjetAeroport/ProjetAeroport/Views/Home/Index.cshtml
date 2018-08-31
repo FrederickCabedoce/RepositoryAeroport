@@ -54,7 +54,7 @@
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
-            <table class="table table-hover table-responsive">
+            <table ng-app="app" class="table table-hover table-responsive">
                 
                     <tr>
                         <th class="TableHeader"  onclick="sort('#prevuBtn')" >Prévu <span id="prevuBtn" class="glyphicon glyphicon-arrow-up"></span></th>
@@ -68,8 +68,35 @@
                         
                     </tr>
                 
-                <tbody id="CorpTable" >
-              
+                <tbody ng-controller="appController" id="CorpTable" >
+                    <tr ng-repeat="x in table" >
+                        <td>
+                            {{x.Prevu}}
+                        </td>
+                        <td>
+                            {{x.Revise}}
+                        </td>
+                        <td style="max-width:200px;">
+                            <img ng-src="{{x.Logo}}" />
+                        </td>
+                        <td>
+                            {{x.ID}}
+                        </td>
+                        <td>
+                            {{x.Destination}}
+                        </td>
+                        <td>
+                           {{x.Etat}}
+                        </td>
+                        <td>
+                           {{x.Porte}}
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Suivre","Home")">
+                                <img src="../image/lien.png" />
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
