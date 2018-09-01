@@ -1,0 +1,1 @@
+﻿insert into vol values('read','Reee','Parti','../image/Yolo/jpg','6:54','7:31','c12','2018/08/31','Entrant');

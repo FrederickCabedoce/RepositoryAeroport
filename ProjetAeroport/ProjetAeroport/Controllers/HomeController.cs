@@ -1,4 +1,5 @@
-﻿using ProjetAeroport.Models;
+﻿using Newtonsoft.Json;
+using ProjetAeroport.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -29,14 +30,14 @@ namespace ProjetAeroport.Controllers
 
             return View();
         }
-       
-        public JsonResult Entrant(string jour)
+
+        public string Entrant(string jour)
         {
-            
-            List<Vol> t = VolDAO.FetchByType("Entrant",jour);
-            
-          
-            return Json(t,JsonRequestBehavior.AllowGet);
+
+            List<Vol> t = VolDAO.FetchByType("Entrant", jour);
+            string json = JsonConvert.SerializeObject(t);
+
+            return json;
         }
         public ActionResult Sortant(string jour)
         {

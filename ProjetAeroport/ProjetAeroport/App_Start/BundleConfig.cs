@@ -25,6 +25,10 @@ namespace ProjetAeroport
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/Content/js").Include("~/Content/Angular").Include(
+                "~/Content/Angular/Module.js",
+                "~/Content/Angular/Service.js",
+                "~/Content/Angular/AngularController.js"));
         }
     }
 }
