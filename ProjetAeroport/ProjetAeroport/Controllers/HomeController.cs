@@ -39,13 +39,13 @@ namespace ProjetAeroport.Controllers
 
             return json;
         }
-        public ActionResult Sortant(string jour)
+        public string Sortant(string jour)
         {
 
             List<Vol> t = VolDAO.FetchByType("Sortant",jour);
+            string json = JsonConvert.SerializeObject(t);
 
-
-            return PartialView("_Entrant", t);
+            return json;
         }
         public ActionResult Suivre() {
 

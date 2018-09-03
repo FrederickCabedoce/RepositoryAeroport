@@ -19,6 +19,7 @@
         var jourS;
         var typevol;
         var lastSorted;
+       
 
 
 
@@ -86,17 +87,24 @@
         }
 
         function AjaxRequestEntrant() {
-            /*alert('help here?');
-            app.controller('appController', function ($scope, $http) {
-                $http.get('/Home/Entrant').then(function (dat) {
-                    $scope.table = dat.data;
-                }, function (error) {
-                    alert('Help?');
+
+            var scope = angular.element($("#CorpTable")).scope();
+
+            scope.$apply(function () {
+
+                scope.https.get('/Home/Entrant', { params: { jour: jourS } }).then(function (response) {
+                scope.elements = response.data;
+                    //var te = JSON.stringify(response.data) //Pour debugger ce que response retourne
+                    //alert(te);
                 })
-            });*/
+                typevol = "Entrant";
+
+            });
+
+            
 
 
-            $.ajax({
+           /* $.ajax({
                 type: "POST",
                 url: "/Home/Entrant",//Entrant est l'action result qui retourne la vue partiel
                 dataType: "html",
@@ -108,11 +116,25 @@
                 error: function () {
                     alert("There was an error");
                 }
-            });   //Fin $.ajax
+            }); */  //Fin $.ajax
         } //Fin AjaxRequestEntrant()
 
         function AjaxRequestSortant() {
-            $.ajax({
+
+            var scope = angular.element($("#CorpTable")).scope();
+
+            scope.$apply(function () {
+
+                scope.https.get('/Home/Sortant', { params: { jour: jourS } }).then(function (response) {
+                    scope.elements = response.data;
+                    //var te = JSON.stringify(response.data) //Pour debugger ce que response retourne
+                    //alert(te);
+                })
+
+            });
+            typevol = "Sortant";
+
+            /* $.ajax({
                 type: "POST",
                 url: "/Home/Sortant",//Entrant est l'action result qui retourne la vue partiel
                 dataType: "html",
@@ -124,25 +146,20 @@
                 error: function () {
                     alert("There was an error");
                 }
-            });   //Fin $.ajax
+            });  */ //Fin $.ajax
         } //Fin AjaxRequestSortant()
 
 
     </script>
 </head>
+
 <body ng-app="myapp">
     <script>
-        var app = angular.module('myapp', []);
-        app.controller('myController', function ($scope, $http) {
-            $scope.tester = "ayelmao"
-            $http.get('/Home/Entrant', { params: { jour: "2018/09/01" } }).then(function (response) {
-                $scope.elements = response.data;
-                var te = JSON.stringify(response.data)
-                alert(te);
-                $scope.detre = "REEEE";
-                alert("Ayelmaaoo");
-            })
+        var app = angular.module('myapp', []).controller('myController', function ($scope, $http) {
+            $scope.elements = "";
+            $scope.https = $http;
         });
+     
     </script>
     <div class="navbar navbar-inverse " style="margin-bottom:0px;" >
             <div style="margin:auto">

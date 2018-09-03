@@ -69,16 +69,16 @@
                     </tr>
                 
                 <tbody ng-controller="myController" id="CorpTable" >
-                    {{elements}}
+                    
                     <tr ng-repeat="x in elements"  >
                         <td>
-                            {{tester}}
+                            {{x.Prevu}}
                         </td>
                         <td>
-                            {{testSecond.Prevu}}
+                            {{x.Revise}}
                         </td>
-                        <td style="max-width:200px;">
-                            <img ng-src="{{x.Logo}}" />
+                        <td >
+                            <img ng-src="{{x.Logo}}"  />
                         </td>
                         <td>
                             {{x.ID}}
@@ -90,7 +90,7 @@
                            {{x.Etat}}
                         </td>
                         <td>
-                           {{detre}}
+                           {{x.Porte}}
                         </td>
                         <td>
                             <a href="@Url.Action("Suivre","Home")">
