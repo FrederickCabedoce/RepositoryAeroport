@@ -44,6 +44,15 @@
 
             lastSorted = btnId;
 
+
+
+            /*app.filter('FiltreParSujet', function () {
+                return function (items) {
+
+                }
+            })*/
+
+
         }
 
         function Today() {
@@ -54,9 +63,9 @@
                 jourS = jour.getFullYear() + "/" + jour.getMonth() + "/" + jour.getDate();
 
                 if (typevol == "Entrant") {
-                    AjaxRequestEntrant();
+                    AjaxRequestVol("Entrant");
                 } else {
-                    AjaxRequestSortant();
+                    AjaxRequestVol("Sortant");
                 }
 
 
@@ -78,21 +87,21 @@
 
 
                 if (typevol == "Entrant") {
-                    AjaxRequestEntrant();
+                    AjaxRequestVol("Entrant");
                 } else {
-                    AjaxRequestSortant();
+                    AjaxRequestVol("Sortant");
                 }
             }
 
         }
 
-        function AjaxRequestEntrant() {
+        function AjaxRequestVol(type) {
 
-            var scope = angular.element($("#CorpTable")).scope();
+            var scope = angular.element($("#TeteTable")).scope();
 
             scope.$apply(function () {
 
-                scope.https.get('/Home/Entrant', { params: { jour: jourS } }).then(function (response) {
+                scope.https.get('/Home/GetVols', { params: { jour: jourS, typevol: type } }).then(function (response) {
                 scope.elements = response.data;
                     //var te = JSON.stringify(response.data) //Pour debugger ce que response retourne
                     //alert(te);
@@ -158,7 +167,35 @@
         var app = angular.module('myapp', []).controller('myController', function ($scope, $http) {
             $scope.elements = "";
             $scope.https = $http;
+            $scope.subject = "Destination";
+            $scope.flow = "Asc"
+
+        }).filter('FilterBySubject', function () {
+            return function (items, scope) {
+                // alert(items[0][scope.subject]);              
+                switch (scope.subject) {
+                    case ("Destination"):
+                        if (scope.flow == "Asc") {
+                            
+                            return items;
+                        }
+                        else {
+                            
+                            return items;
+                        }
+                        break;
+                }
+
+            }
         });
+
+        /*function compareDestination(a,b) {
+            if (a.Destination > b.Destination)
+                return 1;
+            if (a.Destination < b.Destination)
+                return -1;
+            return 0;
+        }*/
      
     </script>
     <div class="navbar navbar-inverse " style="margin-bottom:0px;" >

@@ -2,6 +2,7 @@
 using ProjetAeroport.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -31,22 +32,23 @@ namespace ProjetAeroport.Controllers
             return View();
         }
 
-        public string Entrant(string jour)
+        public string GetVols(string jour, string typevol)
         {
-
-            List<Vol> t = VolDAO.FetchByType("Entrant", jour);
-            string json = JsonConvert.SerializeObject(t);
+            
+            DataSet t = VolDAO.FetchByType(typevol, jour);
+            List<Vol> liste = Vol.LoadFromDataSet(t);
+            string json = JsonConvert.SerializeObject(liste);
 
             return json;
         }
-        public string Sortant(string jour)
+       /* public string Sortant(string jour)
         {
 
             List<Vol> t = VolDAO.FetchByType("Sortant",jour);
             string json = JsonConvert.SerializeObject(t);
 
             return json;
-        }
+        }*/
         public ActionResult Suivre() {
 
 
